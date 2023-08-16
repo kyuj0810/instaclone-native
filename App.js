@@ -1,10 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Asset } from 'expo-asset';
+import LoggedOutNav from './navigator/LggedOutNav';
 import { NavigationContainer } from '@react-navigation/native';
 
 SplashScreen.preventAutoHideAsync();
@@ -48,18 +47,8 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text>Hello!!ㅋㅋㄱ</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer onReady={onLayoutRootView}>
+      <LoggedOutNav />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
