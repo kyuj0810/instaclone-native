@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { Asset } from 'expo-asset';
+import { NavigationContainer } from '@react-navigation/native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,11 +17,16 @@ export default function App() {
       try {
         const fontsToLoad = [Ionicons.font];
         const fontPromises = fontsToLoad.map((font) => Font.loadAsync(font));
-        console.log(fontPromises);
-        // Pre-load fonts, make any API calls you need to do here
+        const imagesToLoad = [
+          require('./assets/logo.png'),
+          'https://similarpng.com/instagram-name-logo-transparent-png/',
+        ];
+        const imagePromises = imagesToLoad.map((image) =>
+          Asset.loadAsync(image)
+        );
 
         //await Font.loadAsync(Entypo.font);
-        await new Promise.all(fontPromises);
+        await new Promise.all([...fontPromises, ...imagePromises]);
       } catch (e) {
         console.warn(e);
       } finally {
