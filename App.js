@@ -5,6 +5,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Asset } from 'expo-asset';
 import LoggedOutNav from './navigator/LggedOutNav';
 import { NavigationContainer } from '@react-navigation/native';
+import { Appearance, useColorScheme } from 'react-native';
+import { ThemeProvider } from 'styled-components';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,10 +47,14 @@ export default function App() {
   if (!loading) {
     return null;
   }
-
+  const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+    console.log(colorScheme);
+  });
   return (
+    // <ThemeProvider theme={ligth ? ligthTheme : darkTheme}>
     <NavigationContainer onReady={onLayoutRootView}>
       <LoggedOutNav />
     </NavigationContainer>
+    // </ThemeProvider>
   );
 }
