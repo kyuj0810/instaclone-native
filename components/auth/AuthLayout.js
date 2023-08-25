@@ -1,5 +1,10 @@
 import React from 'react';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
@@ -7,7 +12,7 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
   background-color: black;
-  padding: 0px 40px;
+  padding: 0px 20px;
 `;
 //react nativ 에서는 모든 flex 컨테이너가 기본적으로 flex direction이 column임.
 
@@ -25,8 +30,17 @@ export default function AuthLayout({ children }) {
   return (
     <TouchableWithoutFeedback style={{ flex: 1 }} onPress={dismissKeyboard}>
       <Container>
-        <Logo resizeMode="contain" source={require('../../assets/logo.png')} />
-        {children}
+        <KeyboardAvoidingView
+          style={{ width: '100%', justifyContent: 'center' }}
+          behavior="position"
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
+        >
+          <Logo
+            resizeMode="contain"
+            source={require('../../assets/logo.png')}
+          />
+          {children}
+        </KeyboardAvoidingView>
       </Container>
     </TouchableWithoutFeedback>
   );
