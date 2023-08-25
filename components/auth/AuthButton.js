@@ -5,8 +5,8 @@ import { colors } from '../../colors';
 const Button = styled.TouchableOpacity`
   background-color: ${colors.blue};
   padding: 15px 10px;
-  //margin-top: 20px;
   border-radius: 4px;
+  //margin-top: 20px;
   width: 100%;
   opacity: ${(props) => (props.disabled ? '0.5' : '1')};
 `;
