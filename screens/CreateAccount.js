@@ -19,11 +19,11 @@ export default function CreateAccount() {
   };
 
   useEffect(() => {
-    register('firstName');
-    register('lastName');
-    register('username');
-    register('email');
-    register('password');
+    register('firstName', { required: true });
+    register('lastName', { required: true });
+    register('username', { required: true });
+    register('email', { required: true });
+    register('password', { required: true });
   }, [register]);
 
   return (
@@ -33,7 +33,7 @@ export default function CreateAccount() {
         placeholder="First Name"
         returnKeyType="next"
         onSubmitEditing={() => onNext(lastNameRef)}
-        placeholderTextColor={'rgba(244,244,244,0.8)'}
+        placeholderTextColor={'rgba(244,244,244,0.6)'}
         onChangeText={(text) => setValue('firstName', text)}
       />
       <TextInput
@@ -41,7 +41,7 @@ export default function CreateAccount() {
         placeholder="Last Name"
         returnKeyType="next"
         onSubmitEditing={() => onNext(usernameRef)}
-        placeholderTextColor={'rgba(244,244,244,0.8)'}
+        placeholderTextColor={'rgba(244,244,244,0.6)'}
         onChangeText={(text) => setValue('lastName', text)}
       />
       <TextInput
@@ -50,7 +50,7 @@ export default function CreateAccount() {
         autoCapitalize={'none'}
         returnKeyType="next"
         onSubmitEditing={() => onNext(emailRef)}
-        placeholderTextColor={'rgba(244,244,244,0.8)'}
+        placeholderTextColor={'rgba(244,244,244,0.6)'}
         onChangeText={(text) => setValue('username', text)}
       />
       <TextInput
@@ -59,7 +59,7 @@ export default function CreateAccount() {
         keyboardType="email-address"
         returnKeyType="next"
         onSubmitEditing={() => onNext(passwordRef)}
-        placeholderTextColor={'rgba(244,244,244,0.8)'}
+        placeholderTextColor={'rgba(244,244,244,0.6)'}
         onChangeText={(text) => setValue('email', text)}
       />
       <TextInput
@@ -67,12 +67,16 @@ export default function CreateAccount() {
         placeholder="Password"
         secureTextEntry
         returnKeyType="done"
-        onSubmitEditing={onDone}
         lastOne={true}
-        placeholderTextColor={'rgba(244,244,244,0.8)'}
+        placeholderTextColor={'rgba(244,244,244,0.6)'}
+        onSubmitEditing={handleSubmit(onValid)}
         onChangeText={(text) => setValue('password', text)}
       />
-      <AuthButton text="Create Account" disabled={true} onPress={() => null} />
+      <AuthButton
+        text="Create Account"
+        loading
+        onPress={handleSubmit(onValid)}
+      />
     </AuthLayout>
   );
 }

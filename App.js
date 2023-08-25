@@ -7,6 +7,8 @@ import LoggedOutNav from './navigator/LggedOutNav';
 import { NavigationContainer } from '@react-navigation/native';
 import { Appearance, useColorScheme } from 'react-native';
 import { ThemeProvider } from 'styled-components';
+import { ApolloProvider } from '@apollo/client';
+import client from './apollo';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -52,9 +54,11 @@ export default function App() {
   });
   return (
     // <ThemeProvider theme={ligth ? ligthTheme : darkTheme}>
-    <NavigationContainer onReady={onLayoutRootView}>
-      <LoggedOutNav />
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <NavigationContainer onReady={onLayoutRootView}>
+        <LoggedOutNav />
+      </NavigationContainer>
+    </ApolloProvider>
     // </ThemeProvider>
   );
 }

@@ -16,8 +16,8 @@ export default function LogIn({ navigation }) {
 
   useEffect(() => {
     // useEffect:딱 한 번만 실행하거나 register가 바뀌면 실행하게 만듬.
-    register('username');
-    register('password');
+    register('username', { required: true });
+    register('password', { required: true });
   }, [register]);
   return (
     <AuthLayout>
@@ -25,7 +25,7 @@ export default function LogIn({ navigation }) {
         placeholder="Username"
         returnKeyType="next"
         autoCapitalize={'none'}
-        placeholderTextColor={'rgba(244,244,244,0.8)'}
+        placeholderTextColor={'rgba(244,244,244,0.6)'}
         onSubmitEditing={() => onNext(passwordRef)}
         onChangeText={(text) => setValue('username', text)}
       />
@@ -35,9 +35,9 @@ export default function LogIn({ navigation }) {
         secureTextEntry
         returnKeyType="done"
         lastOne={true}
-        placeholderTextColor={'rgba(244,244,244,0.8)'}
-        onSubmitEditing={handleSubmit(onValid)}
+        placeholderTextColor={'rgba(244,244,244,0.6)'}
         onChangeText={(text) => setValue('password', text)}
+        onSubmitEditing={handleSubmit(onValid)}
       />
       <AuthButton
         text="Log In"
