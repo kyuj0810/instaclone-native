@@ -7,13 +7,15 @@ import LoggedOutNav from './navigator/LggedOutNav';
 import { NavigationContainer } from '@react-navigation/native';
 import { Appearance, useColorScheme } from 'react-native';
 import { ThemeProvider } from 'styled-components';
-import { ApolloProvider } from '@apollo/client';
-import client from './apollo';
+import { ApolloProvider, useReactiveVar } from '@apollo/client';
+import client, { isLoggedInVar } from './apollo';
+import LoggedInNav from './navigator/LoggedInNav';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
 
   useEffect(() => {
     async function prepare() {
@@ -56,7 +58,7 @@ export default function App() {
     // <ThemeProvider theme={ligth ? ligthTheme : darkTheme}>
     <ApolloProvider client={client}>
       <NavigationContainer onReady={onLayoutRootView}>
-        <LoggedOutNav />
+        {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
       </NavigationContainer>
     </ApolloProvider>
     // </ThemeProvider>
