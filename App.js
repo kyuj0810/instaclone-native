@@ -10,6 +10,7 @@ import { ThemeProvider } from 'styled-components';
 import { ApolloProvider, useReactiveVar } from '@apollo/client';
 import client, { isLoggedInVar } from './apollo';
 import LoggedInNav from './navigator/LoggedInNav';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,6 +20,12 @@ export default function App() {
 
   useEffect(() => {
     async function prepare() {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        isLoggedInVar(true);
+        tokenVar(token);
+      }
+
       try {
         const fontsToLoad = [Ionicons.font];
         const fontPromises = fontsToLoad.map((font) => Font.loadAsync(font));
