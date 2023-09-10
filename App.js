@@ -21,6 +21,7 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       const token = await AsyncStorage.getItem('token');
+
       if (token) {
         isLoggedInVar(true);
         tokenVar(token);
