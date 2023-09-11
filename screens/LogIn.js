@@ -53,6 +53,7 @@ export default function LogIn({ route: { params } }) {
     register('username', { required: true });
     register('password', { required: true });
   }, [register]);
+
   return (
     <AuthLayout>
       <TextInput

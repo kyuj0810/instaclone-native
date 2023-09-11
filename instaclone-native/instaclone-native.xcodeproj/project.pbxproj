@@ -547,7 +547,7 @@
 				6ABC81822A8623D7009A7163 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		6ABC81832A8623D7009A7163 /* Build configuration list for PBXNativeTarget "instaclone-native" */ = {
 			isa = XCConfigurationList;
@@ -556,7 +556,7 @@
 				6ABC81852A8623D7009A7163 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		6ABC81862A8623D7009A7163 /* Build configuration list for PBXNativeTarget "instaclone-nativeTests" */ = {
 			isa = XCConfigurationList;
@@ -565,7 +565,7 @@
 				6ABC81882A8623D7009A7163 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		6ABC81892A8623D7009A7163 /* Build configuration list for PBXNativeTarget "instaclone-nativeUITests" */ = {
 			isa = XCConfigurationList;
@@ -574,7 +574,7 @@
 				6ABC818B2A8623D7009A7163 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
