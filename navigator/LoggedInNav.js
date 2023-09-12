@@ -4,6 +4,8 @@ import Feed from '../screens/Feed';
 import Search from '../screens/Search';
 import Notifications from '../screens/Notifications';
 import Profile from '../screens/Profile';
+import { View } from 'react-native';
+import TabIcon from '../components/nav/TabIcon';
 
 const Tabs = createBottomTabNavigator();
 
@@ -22,36 +24,45 @@ export default function LoggedInNav() {
       <Tabs.Screen
         name="Feed"
         component={Feed}
-        screenOptions={{
+        options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="home" size={focused ? 24 : 20} color={color} />
+            <TabIcon iconName={'home'} color={color} focused={focused} />
           ),
         }}
       />
       <Tabs.Screen
         name="Search"
         component={Search}
-        screenOptions={{
+        options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="search" size={focused ? 24 : 20} color={color} />
+            <TabIcon iconName={'search'} color={color} focused={focused} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Camera"
+        component={View}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabIcon iconName={'camera'} color={color} focused={focused} />
           ),
         }}
       />
       <Tabs.Screen
         name="Notifications"
         component={Notifications}
-        screenOptions={{
+        options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="heart" size={focused ? 24 : 20} color={color} />
+            <TabIcon iconName={'heart'} color={color} focused={focused} />
           ),
         }}
       />
       <Tabs.Screen
         name="Profile"
         component={Profile}
-        screenOptions={{
+        options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="person" size={focused ? 24 : 20} color={color} />
+            <TabIcon iconName={'person'} color={color} focused={focused} />
           ),
         }}
       />

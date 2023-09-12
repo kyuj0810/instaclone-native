@@ -14,8 +14,8 @@ export const logUserIn = async (token) => {
 };
 
 const client = new ApolloClient({
-  uri: 'https://icy-pants-grab.loca.lt/graphql',
-  //uri: 'http://localhost:4000/graphql',
+  // uri: 'https://icy-pants-grab.loca.lt/graphql',
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache(),
 });
 
