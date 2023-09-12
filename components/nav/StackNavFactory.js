@@ -11,7 +11,14 @@ const Stack = createNativeStackNavigator();
 
 export default function StackNavFactory({ screenName }) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerTitle: '',
+        headerTransparent: true,
+        headerTintColor: 'white',
+      }}
+    >
       {screenName === 'Feed' ? (
         <Stack.Screen name="Feed" component={Feed} />
       ) : null}
