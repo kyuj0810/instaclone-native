@@ -1,9 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Feed from '../screens/Feed';
-import Search from '../screens/Search';
-import Notifications from '../screens/Notifications';
-import Me from '../screens/Me';
 import { View } from 'react-native';
 import TabIcon from '../components/nav/TabIcon';
 import StackNavFactory from '../components/nav/StackNavFactory';

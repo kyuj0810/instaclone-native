@@ -8,15 +8,18 @@ import Notifications from '../../screens/Notifications';
 import Me from '../../screens/Me';
 
 const Stack = createNativeStackNavigator();
-
+//3:32 초부터 다시보기
 export default function StackNavFactory({ screenName }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerBackTitleVisible: false,
         headerTitle: '',
         headerTransparent: true,
+        // headerShown: false,
         headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: 'black',
+        },
       }}
     >
       {screenName === 'Feed' ? (
