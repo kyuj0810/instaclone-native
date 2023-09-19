@@ -38,7 +38,6 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  // uri: 'https://icy-pants-grab.loca.lt/graphql',
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
