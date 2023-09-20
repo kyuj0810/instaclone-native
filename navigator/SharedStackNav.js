@@ -9,16 +9,16 @@ import Me from '../screens/Me';
 import { Image } from 'react-native';
 
 const Stack = createStackNavigator();
-//3:32 초부터 다시보기
+
 export default function SharedStackNav({ screenName }) {
   return (
     <Stack.Navigator
-      headerMode="screen"
       screenOptions={{
         // headerTitle: '',
         // headerTransparent: true,
         // headerShown: false,
         headerTintColor: 'white',
+        headerMode: 'rscreen',
         headerStyle: {
           backgroundColor: 'black',
         },
@@ -26,7 +26,7 @@ export default function SharedStackNav({ screenName }) {
     >
       {screenName === 'Feed' ? (
         <Stack.Screen
-          name="Feed"
+          name="FeedScreen"
           component={Feed}
           options={{
             headerTitle: () => (
