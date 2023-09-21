@@ -3,10 +3,11 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Image, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 // 9 : 33~
 const Containter = styled.View`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 `;
 const Header = styled.TouchableOpacity`
   padding: 10px;
@@ -24,14 +25,28 @@ const Username = styled.Text`
   font-weight: 600;
 `;
 const File = styled.Image``;
-const Actions = styled.View``;
-const Action = styled.TouchableOpacity``;
-const Caption = styled.View``;
+const Actions = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+const Action = styled.TouchableOpacity`
+  margin-right: 10px;
+`;
+const Caption = styled.View`
+  flex-direction: row;
+`;
 const CaptionText = styled.Text`
   color: white;
+  margin-left: 5px;
 `;
 const Likes = styled.Text`
   color: white;
+  margin: 7px 0px;
+  font-weight: 600;
+`;
+
+const ExtraContainer = styled.View`
+  padding: 10px;
 `;
 
 function Photo({ id, user, caption, file, isLiked, likes }) {
@@ -44,7 +59,6 @@ function Photo({ id, user, caption, file, isLiked, likes }) {
       setImageHeight(height / 3);
     });
   }, [file]);
-  console.log(user);
 
   return (
     <Containter>
@@ -57,17 +71,29 @@ function Photo({ id, user, caption, file, isLiked, likes }) {
         style={{ width, height: imageHeight }}
         source={{ uri: file }}
       />
-      <Actions>
-        <Action />
-        <Action />
-      </Actions>
-      <Likes>{likes === 1 ? '1 like' : `${likes} likes`}</Likes>
-      <Caption>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-          <Username>{user.username}</Username>
+      <ExtraContainer>
+        <Actions>
+          <Action>
+            <Ionicons
+              name={isLiked ? 'heart' : 'heart-outline'}
+              color={isLiked ? 'tomato' : 'white'}
+              size={22}
+            />
+          </Action>
+          <Action onPress={() => navigation.navigate('Comments')}>
+            <Ionicons name="chatbubble-outline" color="white" size={22} />
+          </Action>
+        </Actions>
+        <TouchableOpacity onPress={() => navigation.navigate('Likes')}>
+          <Likes>{likes === 1 ? '1 like' : `${likes} likes`}</Likes>
         </TouchableOpacity>
-        <CaptionText>{caption}</CaptionText>
-      </Caption>
+        <Caption>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            <Username>{user.username}</Username>
+          </TouchableOpacity>
+          <CaptionText>{caption}</CaptionText>
+        </Caption>
+      </ExtraContainer>
     </Containter>
   );
 }
