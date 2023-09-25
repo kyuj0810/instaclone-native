@@ -5,7 +5,6 @@ import { Image, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
-// 9 : 33~
 const Containter = styled.View`
   /* border: 1px solid blue; */
 `;
@@ -18,7 +17,7 @@ const UserAvatar = styled.Image`
   margin-right: 10px;
   width: 25px;
   height: 25px;
-  border-radius: 50%;
+  border-radius: 12.5px;
 `;
 const Username = styled.Text`
   color: white;
@@ -55,7 +54,6 @@ function Photo({ id, user, caption, file, isLiked, likes }) {
   const [imageHeight, setImageHeight] = useState(height - 450);
   useEffect(() => {
     Image.getSize(file, (width, height) => {
-      console.log(height);
       setImageHeight(height / 3);
     });
   }, [file]);

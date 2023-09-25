@@ -2,7 +2,6 @@ import { ActivityIndicator, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 function ScreenLayout({ loading, children }) {
-  console.log(loading);
   return (
     <View
       style={{

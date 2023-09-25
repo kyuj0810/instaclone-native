@@ -60,7 +60,7 @@ export default function App() {
     return null;
   }
   const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-    console.log(colorScheme);
+    // console.log(colorScheme);
   });
   return (
     // <ThemeProvider theme={ligth ? ligthTheme : darkTheme}>
