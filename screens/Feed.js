@@ -4,11 +4,11 @@ import { gql, useQuery } from '@apollo/client';
 import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from '../fragments';
 import ScreenLayout from '../components/ScreenLayout';
 import Photo from '../components/Photo';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const FEED_QUERY = gql`
-  query seeFeed {
-    seeFeed {
+  query seeFeed($offset: Int!) {
+    seeFeed(offset: $offset) {
       ...PhotoFragment
       user {
         username
@@ -25,9 +25,13 @@ const FEED_QUERY = gql`
   ${PHOTO_FRAGMENT}
   ${COMMENT_FRAGMENT}
 `;
-
+//1:06~ #16.10 Infinite Scrolling part One
 export default function Feed({ navigation }) {
-  const { data, loading, refetch } = useQuery(FEED_QUERY);
+  const { data, loading, refetch, fetchMore } = useQuery(FEED_QUERY, {
+    variables: {
+      offset: 0,
+    },
+  });
   const renderPhoto = ({ item: photo }) => {
     return <Photo {...photo} />;
   };
@@ -40,12 +44,18 @@ export default function Feed({ navigation }) {
 
   const [refreshing, setRefreshing] = useState(false);
 
-  console.log('refresh!!!');
-  console.log(refreshing);
-
+  //5:11~
   return (
     <ScreenLayout loading={loading}>
       <FlatList
+        onEndReachedThreshold={0}
+        onEndReached={() =>
+          fetchMore({
+            variables: {
+              offset: data?.seeFeed?.length,
+            },
+          })
+        }
         refreshing={refreshing}
         onRefresh={refresh}
         style={{ width: '100%' }}
