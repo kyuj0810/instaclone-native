@@ -51,7 +51,7 @@ export default function Feed({ navigation }) {
         <Text style={{ color: 'red' }}>Logout</Text>
       </TouchableOpacity>
       <FlatList
-        onEndReachedThreshold={0.05}
+        onEndReachedThreshold={0.02}
         onEndReached={() =>
           fetchMore({
             variables: {
@@ -59,7 +59,7 @@ export default function Feed({ navigation }) {
             },
           })
         }
-        refreshing={true}
+        refreshing={refreshing}
         onRefresh={refresh}
         style={{ width: '100%' }}
         showsVerticalScrollIndicator={false}

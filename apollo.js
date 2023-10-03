@@ -38,9 +38,8 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache({
+export const cache = new InMemoryCache(
+  new InMemoryCache({
     typePolicies: {
       Query: {
         fields: {
@@ -54,7 +53,12 @@ const client = new ApolloClient({
         },
       },
     }, // apollo에게 type을 설정할 수 있도록 해줌.
-  }),
+  })
+);
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache,
 });
 
 export default client;

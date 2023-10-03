@@ -8,9 +8,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Appearance, useColorScheme } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider, useReactiveVar } from '@apollo/client';
-import client, { isLoggedInVar, tokenVar } from './apollo';
+import client, { cache, isLoggedInVar, tokenVar } from './apollo';
 import LoggedInNav from './navigator/LoggedInNav';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,6 +27,11 @@ export default function App() {
         isLoggedInVar(true);
         tokenVar(token);
       }
+
+      await persistCache({
+        cache,
+        storage: new LocalStorageWrapper(AsyncStorage),
+      });
 
       try {
         const fontsToLoad = [Ionicons.font];
