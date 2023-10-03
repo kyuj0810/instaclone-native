@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 import { logUserOut } from '../apollo';
 import { gql, useQuery } from '@apollo/client';
 import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from '../fragments';
@@ -47,8 +47,11 @@ export default function Feed({ navigation }) {
   //5:11~
   return (
     <ScreenLayout loading={loading}>
+      <TouchableOpacity onPress={() => logUserOut()}>
+        <Text style={{ color: 'red' }}>Logout</Text>
+      </TouchableOpacity>
       <FlatList
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.05}
         onEndReached={() =>
           fetchMore({
             variables: {
@@ -56,7 +59,7 @@ export default function Feed({ navigation }) {
             },
           })
         }
-        refreshing={refreshing}
+        refreshing={true}
         onRefresh={refresh}
         style={{ width: '100%' }}
         showsVerticalScrollIndicator={false}
@@ -65,6 +68,7 @@ export default function Feed({ navigation }) {
         renderItem={renderPhoto}
       />
     </ScreenLayout>
+
     // <View
     //   style={{
     //     backgroundColor: 'black',
