@@ -31,6 +31,7 @@ export default function App() {
       await persistCache({
         cache,
         storage: new LocalStorageWrapper(AsyncStorage),
+        // serialize: false,
       });
 
       try {
