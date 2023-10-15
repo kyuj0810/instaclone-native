@@ -15,16 +15,16 @@ const Stack = createStackNavigator();
 export default function SharedStackNav({ screenName }) {
   return (
     <Stack.Navigator
-      screenOptions={{
-        // headerTitle: '',
-        // headerTransparent: true,
-        // headerShown: false,
-        headerTintColor: 'white',
-        headerMode: 'rscreen',
-        headerStyle: {
-          backgroundColor: 'black',
-        },
-      }}
+    // screenOptions={{
+    //   // headerTitle: '',
+    //   // headerTransparent: true,
+    //   // headerShown: false,
+    //   headerTintColor: 'white',
+    //   headerMode: 'rscreen',
+    //   headerStyle: {
+    //     backgroundColor: 'black',
+    //   },
+    // }}
     >
       {screenName === 'Feed' ? (
         <Stack.Screen
