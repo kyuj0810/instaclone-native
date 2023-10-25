@@ -75,7 +75,9 @@ export default function Search({ navigation }) {
     });
   }, []);
   const renderItem = ({ item: photo }) => (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Photo', { photoId: photo.id })}
+    >
       <Image
         source={{ uri: photo.file }}
         style={{ width: width / 4, height: 100 }}

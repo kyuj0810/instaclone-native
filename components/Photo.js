@@ -58,7 +58,7 @@ const ExtraContainer = styled.View`
   padding: 10px;
 `;
 
-function Photo({ id, user, caption, file, isLiked, likes }) {
+function Photo({ id, user, caption, file, isLiked, likes, fullView }) {
   const navigation = useNavigation();
   const { width, height } = useWindowDimensions();
   const [imageHeight, setImageHeight] = useState(height - 450);

@@ -45,7 +45,6 @@ export default function Feed({ navigation }) {
 
   const [refreshing, setRefreshing] = useState(false);
 
-  //5:11~
   return (
     <ScreenLayout loading={loading}>
       <TouchableOpacity onPress={() => logUserOut()}>
