@@ -1,7 +1,14 @@
 import { gql, useLazyQuery } from '@apollo/client';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { ActivityIndicator, Text, TextInput, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  View,
+  useWindowDimensions,
+} from 'react-native';
 import styled from 'styled-components/native';
 import DismissKeyboard from '../components/DismissKeyboard';
 
@@ -25,9 +32,17 @@ const MessageText = styled.Text`
   font-weight: 600;
 `;
 
-const Input = styled.TextInput``;
+const Input = styled.TextInput`
+  background-color: rgba(255, 255, 255, 0.7);
+  color: black;
+  width: ${(props) => props.width / 1.5}px;
+  padding: 5px 10px;
+  border-radius: 7px;
+`;
 
 export default function Search({ navigation }) {
+  const numColumns = 4;
+  const { width } = useWindowDimensions();
   const { setValue, register, watch, handleSubmit } = useForm();
   const [startQueryFn, { loading, data, called }] = useLazyQuery(SEARCH_PHOTOS);
   const onValid = ({ keyword }) => {
@@ -38,9 +53,9 @@ export default function Search({ navigation }) {
     });
   };
   const SearchBox = () => (
-    <TextInput
-      style={{ backgroundColor: 'white' }}
-      placeholderTextColor="black"
+    <Input
+      width={width}
+      placeholderTextColor="rgba(0,0,0,0.8)"
       placeholder="Search photos"
       autoCapitalize="none"
       returnKeyLabel="Search"
@@ -59,7 +74,14 @@ export default function Search({ navigation }) {
       minLength: 3,
     });
   }, []);
-  console.log(data);
+  const renderItem = ({ item: photo }) => (
+    <TouchableOpacity>
+      <Image
+        source={{ uri: photo.file }}
+        style={{ width: width / 4, height: 100 }}
+      />
+    </TouchableOpacity>
+  );
   return (
     <DismissKeyboard>
       <View style={{ flex: 1, backgroundColor: 'black' }}>
@@ -74,13 +96,26 @@ export default function Search({ navigation }) {
             <MessageText>Search by keyword</MessageText>
           </MessageContainer>
         ) : null}
-        {data?.searchPhotos !== undefined &&
-        data?.searchPhotos?.length === 0 ? (
-          <MessageContainer>
-            <MessageText>Could not find anything.</MessageText>
-          </MessageContainer>
+        {data?.searchPhotos !== undefined ? (
+          data?.searchPhotos?.length === 0 ? (
+            <MessageContainer>
+              <MessageText>Could not find anything.</MessageText>
+            </MessageContainer>
+          ) : (
+            <FlatList
+              numColumns={numColumns}
+              data={data?.searchPhotos}
+              keyExtractor={(photo) => '' + photo.id}
+              renderItem={renderItem}
+            />
+          )
         ) : null}
       </View>
     </DismissKeyboard>
   );
 }
+
+/**
+ * 챌린지
+ * 사진을 클릭하면 photo화면으로 이동할 수 있도록
+ */
